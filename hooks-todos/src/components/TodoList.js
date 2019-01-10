@@ -1,10 +1,24 @@
 import React, { useContext } from 'react'
+import axios from 'axios'
 import TodosContext from '../context'
+import { jsonServerURL } from '../constants'
 
 export default function TodoList() {
   const { state, dispatch } = useContext(TodosContext)
   const title =
     state.todos.length > 0 ? `${state.todos.length} Todos` : 'Nothing to do!'
+
+  const deleteTodo = async todo => {
+    await axios.delete(`${jsonServerURL}/${todo.id}`)
+    dispatch({ type: 'REMOVE_TODO', payload: todo })
+  }
+
+  const toggleTodo = async todo => {
+    const response = await axios.patch(`${jsonServerURL}/${todo.id}`, {
+      complete: !todo.complete
+    })
+    dispatch({ type: 'TOGGLE_TODO', payload: response.data })
+  }
 
   return (
     <div className="container mx-auto max-w-md text-center font-mono">
@@ -17,9 +31,7 @@ export default function TodoList() {
             <span
               className={`flex-1 ml-12 cursor-pointer ${todo.complete &&
                 'line-through text-grey-darkest'}`}
-              onDoubleClick={() =>
-                dispatch({ type: 'TOGGLE_TODO', payload: todo })
-              }>
+              onDoubleClick={() => toggleTodo(todo)}>
               {todo.text}
             </span>
             <button
@@ -32,8 +44,7 @@ export default function TodoList() {
                 className="h-6"
               />
             </button>
-            <button
-              onClick={() => dispatch({ type: 'REMOVE_TODO', payload: todo })}>
+            <button onClick={() => deleteTodo(todo)}>
               <img
                 src="https://icon.now.sh/delete/8b0000"
                 alt="Delete Icon"

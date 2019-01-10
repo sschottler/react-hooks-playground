@@ -1,5 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react'
+import axios from 'axios'
+import uuidv4 from 'uuid/v4'
 import TodosContext from '../context'
+import { jsonServerURL } from '../constants'
 
 export default function TodoForm() {
   const [todo, setTodo] = useState('')
@@ -19,12 +22,20 @@ export default function TodoForm() {
     [currentTodo.id]
   )
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault()
     if (currentTodo.text) {
-      dispatch({ type: 'UPDATE_TODO', payload: todo })
+      const response = await axios.patch(`${jsonServerURL}/${currentTodo.id}`, {
+        text: todo
+      })
+      dispatch({ type: 'UPDATE_TODO', payload: response.data })
     } else {
-      dispatch({ type: 'ADD_TODO', payload: todo })
+      const response = await axios.post(jsonServerURL, {
+        id: uuidv4(),
+        text: todo,
+        complete: false
+      })
+      dispatch({ type: 'ADD_TODO', payload: response.data })
     }
     setTodo('')
   }
