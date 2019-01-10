@@ -4,7 +4,7 @@ Apps from [React Hooks Udemy course](https://www.udemy.com/react-hooks)
 
 ## Hooks Todos
 
-Demonstrates replicating redux with useContext and useReducer hooks
+Demonstrates replacing redux with useContext and useReducer hooks
 
 ## Hooks News
 
