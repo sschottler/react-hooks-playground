@@ -23,7 +23,7 @@ const TodoItem = ({
     <span
       className="todo-item__text"
       title="double click to mark this task as completed"
-      onDoubleClick={() => onToggleTodo(todo)}>
+      onClick={() => onToggleTodo(todo)}>
       {todo.text}
     </span>
     <Button className="todo-item__edit" onClick={() => onEditTodo(todo)}>
