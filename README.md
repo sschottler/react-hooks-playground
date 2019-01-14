@@ -1,6 +1,6 @@
 # React Hooks Playground
 
-Apps from [React Hooks Udemy course](https://www.udemy.com/react-hooks)
+Apps from [React Hooks Udemy course](https://www.udemy.com/react-hooks) (with significant restyling of the todo app)
 
 ## Hooks Todos
 
