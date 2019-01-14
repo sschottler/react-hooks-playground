@@ -11,3 +11,9 @@ Demonstrates replacing redux with useContext and useReducer hooks
 ## Hooks News
 
 ![Hooks News](hooksnews.jpg)
+
+## Original Todos App Style
+
+Yeeesh!
+
+![Hooks todos fugly](oldtodosstyle.jpg)
