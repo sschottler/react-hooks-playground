@@ -1,10 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
+import styled from 'styled-components'
 import uuidv4 from 'uuid/v4'
 import TodosContext from '../context'
 import { jsonServerURL } from '../constants'
+import Button from '../elements/Button'
+import Input from '../elements/Input'
 
-export default function TodoForm() {
+const TodoForm = ({ className }) => {
   const [todo, setTodo] = useState('')
   const {
     state: { currentTodo = {} },
@@ -41,13 +44,23 @@ export default function TodoForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex justify-center p-5">
-      <input
+    <form onSubmit={handleSubmit} className={className}>
+      <Input
+        className="task-input"
         type="text"
         onChange={event => setTodo(event.target.value)}
         value={todo}
-        className="border-black border-solid border-2"
       />
+      <Button>{currentTodo.text ? 'Update Task' : 'Add Task'}</Button>
     </form>
   )
 }
+
+export default styled(TodoForm)`
+  padding: 1.8rem 3rem;
+  border-bottom: 1px solid #e5e8e9;
+
+  .task-input {
+    margin-right: 0.6rem;
+  }
+`

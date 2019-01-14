@@ -1,0 +1,6 @@
+export const defaultText = '#2E2E2E'
+export const background = '#F6F8F9'
+export const lightBlue = '#15aaf5'
+export const red = '#F51621'
+export const lightGray = '#e5e8e9'
+export const green = '#51b811'
