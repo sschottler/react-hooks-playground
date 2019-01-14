@@ -4,6 +4,7 @@ import Button from '../elements/Button'
 import { green, lightGray } from '../colors'
 
 const TodoItem = ({
+  style,
   className,
   todo,
   onToggleTodo,
@@ -11,6 +12,7 @@ const TodoItem = ({
   onEditTodo
 }) => (
   <li
+    style={{ ...style }}
     className={`${className}${todo.complete ? ' complete' : ''}`}
     key={todo.id}>
     <i

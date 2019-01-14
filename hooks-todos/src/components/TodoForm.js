@@ -62,5 +62,6 @@ export default styled(TodoForm)`
 
   .task-input {
     margin-right: 0.6rem;
+    width: 40%;
   }
 `

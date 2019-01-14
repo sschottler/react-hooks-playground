@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
+import { Transition } from 'react-spring'
 import axios from 'axios'
 import TodosContext from '../context'
 import { jsonServerURL } from '../constants'
@@ -30,14 +31,22 @@ const TodoList = ({ className }) => {
     <div className={className}>
       <h1>{title}</h1>
       <ul>
-        {state.todos.map(todo => (
-          <TodoItem
-            todo={todo}
-            onToggleTodo={toggleTodo}
-            onDeleteTodo={deleteTodo}
-            onEditTodo={editTodo}
-          />
-        ))}
+        <Transition
+          items={state.todos}
+          keys={todo => todo.id}
+          from={{ opacity: 0 }}
+          enter={{ opacity: 1 }}
+          leave={{ opacity: 0 }}>
+          {todo => style => (
+            <TodoItem
+              style={style}
+              todo={todo}
+              onToggleTodo={toggleTodo}
+              onDeleteTodo={deleteTodo}
+              onEditTodo={editTodo}
+            />
+          )}
+        </Transition>
       </ul>
     </div>
   )
